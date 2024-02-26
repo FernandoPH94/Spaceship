@@ -48,8 +48,8 @@ public class SpaceShipController {
 		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
 	
-	@GetMapping("/getship/{id}")
-	public ResponseEntity<Map<String,Object>> getShip(@PathVariable("id") int id) {
+	@GetMapping("/getship")
+	public ResponseEntity<Map<String,Object>> getShip(@RequestParam int id) {
 		
 		Map<String,Object> response = new HashMap<>();
 		try {
