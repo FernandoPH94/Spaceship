@@ -1,0 +1,21 @@
+<?xml-model href=""?>
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+    <logger name="com.tecdata.spaceship" level="debug" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+	<logger name="org.springframework.aop" level="debug"/>
+	<logger name="com.tecdata.spaceship.aspect" level="debug"/>
+	<logger name="org.springframework.context.annotation" level="debug"/>
+    <root level="error">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>
