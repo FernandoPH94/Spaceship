@@ -73,6 +73,7 @@ public class SpaceShipController {
 			shipService.saveShip(ship);
 			response.put("message", "La nave se agregó correctamente");
 		}catch(DataAccessException e){
+			response.put("ERROR", e);
 			return new ResponseEntity<>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<>(response,HttpStatus.OK);
@@ -83,10 +84,14 @@ public class SpaceShipController {
 		
 		Map<String,Object> response = new HashMap<>();
 		try {
-			shipService.saveShip(ship);
+			shipService.updateShip(ship);
 			response.put("message", "La nave se actualizó correctamente");
 		}catch(DataAccessException e){
+			response.put("ERROR", e);
 			return new ResponseEntity<>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+		}catch(NotValidValueException nvv){
+			response.put("ERROR", nvv);
+			return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
@@ -99,6 +104,7 @@ public class SpaceShipController {
 			shipService.deleteShip(id);
 			response.put("message", "La nave se borró correctamente");
 		}catch(DataAccessException e){
+			response.put("ERROR", e);
 			return new ResponseEntity<>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<>(response,HttpStatus.OK);

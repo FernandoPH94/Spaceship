@@ -29,12 +29,18 @@ public class ShipServiceImpl implements ShipService{
 	@Cacheable("ship")
 	public Ship getShip(int id){
 		if(id < 0) {
-			throw new NotValidValueException("ID de recurso no válido: " + id);
+			throw new NotValidValueException("ID de la nave no válido: " + id);
 		}
 		return shipRepository.findById(id);
 	}
+	@Transactional
 	public void updateShip(Ship ship) {
-		shipRepository.update(ship);
+		if(shipRepository.findById(ship.getId())!= null) {
+			shipRepository.update(ship);
+		}
+		else{
+			throw new NotValidValueException("ID de la nave no válido: " + ship.getId());				
+		}
 	}
 	@Transactional
 	public void saveShip(Ship ship) {
